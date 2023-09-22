@@ -26,7 +26,7 @@ public class Hero : AliveObject
     private int _animSpeed = Animator.StringToHash("Speed");
     private int _animStrafe = Animator.StringToHash("Strafe");
     private Vector2 _animMov, _targetMov;
-    private Transform _cameraTransform;
+    private Quaternion _currentCameraRot;
 
     private void Start()
     {
@@ -36,7 +36,6 @@ public class Hero : AliveObject
         _playerInput.OnGroundedMoved.Subscribe(UpdateMovement).AddTo(this);
         _playerInput.OnJumped.Subscribe(value => _jumpVelocity = value * jumpForce).AddTo(this);
         _playerInput.OnMouseMoved.Subscribe(value => _rotationInput = value).AddTo(this);
-        _cameraTransform = Camera.main.transform;
     }
 
     private void Update()
@@ -61,8 +60,8 @@ public class Hero : AliveObject
         _lookRot.x -= _rotationInput.y;
         _lookRot.x = Mathf.Clamp(_lookRot.x, -30, 60);
 
-        var rotation = Quaternion.Lerp(_lookTransform.rotation, Quaternion.Euler(_lookRot), .25f);
-        _lookTransform.rotation = rotation;
+        _currentCameraRot = Quaternion.Lerp(_lookTransform.rotation, Quaternion.Euler(_lookRot), Time.deltaTime * 5);
+        _lookTransform.rotation = _currentCameraRot;
     }
 
     private void UpdateMovement(Vector2 mov)
@@ -75,6 +74,7 @@ public class Hero : AliveObject
     {
         Vector3 tempRot = _lookRot;
         tempRot.x = 0;
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(tempRot), 50);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(tempRot), Time.deltaTime * 270);
+        _lookTransform.rotation = _currentCameraRot;
     }
 }
