@@ -23,7 +23,7 @@ namespace AliveObjects
         [SerializeField] private Animator _animator;
         private int _animSpeed = Animator.StringToHash("Speed");
         private int _animStrafe = Animator.StringToHash("Strafe");
-        private Vector2 _animMov, _targetMov;
+        private Vector3 _animMov, _targetMov;
 
         private void Start()
         {
@@ -44,7 +44,7 @@ namespace AliveObjects
 
             RotateOnLookTransform();
         
-            _animMov = Vector2.Lerp(_animMov,_targetMov, Time.deltaTime * 5);
+            _animMov = Vector3.Lerp(_animMov,_targetMov, Time.deltaTime * 5);
             _animator.SetFloat(_animSpeed, _animMov.y);
             _animator.SetFloat(_animStrafe, _animMov.x);
         
