@@ -192,6 +192,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -91681808587120018, guid: 03d50da00f6209f468e8cd82d8b2f004, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f2c5ac376d41f3f4da2a209b0979c633, type: 2}
     - target: {fileID: 919132149155446097, guid: 03d50da00f6209f468e8cd82d8b2f004, type: 3}
       propertyPath: m_Name
       value: mice
@@ -204,6 +208,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: a5846e0953b728d468e7463a3ebf8494, type: 2}
+    - target: {fileID: 7293071413639273068, guid: 03d50da00f6209f468e8cd82d8b2f004, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d79ed7b5cbb1f2344b20815cf42ca275, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
