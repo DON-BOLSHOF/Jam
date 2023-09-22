@@ -27,6 +27,7 @@ public class Model : MonoBehaviour
 
     [SerializeField] private Animator _animator;
     private int _animSpeed = Animator.StringToHash("Speed");
+    private Vector2 _animMov, _targetMov;
     private Transform _cameraTransform;
 
     private void Start()
@@ -51,6 +52,11 @@ public class Model : MonoBehaviour
             GetDamage(5);
         
         RotateOnLookTransform();
+        
+        _animMov = Vector2.Lerp(_animMov,_targetMov, Time.deltaTime * 5);
+        _animator.SetFloat(_animSpeed, _animMov.y);
+        
+        _controller.Move(_moveDirection * Time.deltaTime);
     }
 
     private void LateUpdate()
@@ -59,14 +65,14 @@ public class Model : MonoBehaviour
         _lookRot.x -= _rotationInput.y;
         _lookRot.x = Mathf.Clamp(_lookRot.x, -30, 60);
 
-        var rotation = Quaternion.Lerp(_lookTransform.rotation, Quaternion.Euler(_lookRot), Time.deltaTime * 10);
+        var rotation = Quaternion.Lerp(_lookTransform.rotation, Quaternion.Euler(_lookRot), .25f);
         _lookTransform.rotation = rotation;
     }
 
     private void UpdateMovement(Vector2 mov)
     {
+        _targetMov = (new Vector3(mov.x, mov.y)) * moveSpeed;
         _moveDirection = _cameraTransform.localToWorldMatrix * (new Vector3(mov.x, 0, mov.y)) * moveSpeed;
-        _animator.SetFloat(_animSpeed, mov.y);
     }
 
     private void RotateOnLookTransform()
@@ -79,10 +85,5 @@ public class Model : MonoBehaviour
     private void GetDamage(int value)
     {
         _health.Value -= value;
-    }
-    
-    private void FixedUpdate()
-    {
-        _controller.Move(_moveDirection * Time.deltaTime);
     }
 }
