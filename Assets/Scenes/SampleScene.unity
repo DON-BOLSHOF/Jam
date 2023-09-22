@@ -682,8 +682,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 676056088}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0.045826524, z: 0, w: 0.99894947}
-  m_LocalPosition: {x: 1.5669155, y: 2.5, z: -3.3695865}
+  m_LocalRotation: {x: 0.000000029802322, y: -0.045826517, z: -0.0000000018626451, w: 0.99894947}
+  m_LocalPosition: {x: 1.3466325, y: 2.1050003, z: -3.0555866}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -810,7 +810,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0175ffdea8042f8981fa00023cf1747, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damageValue: 10
   _distance: 75
   _shootPoint: {fileID: 1523087349}
   _bulletPrefab: {fileID: 4060343513484375229, guid: 02772f211d19e48449f7ee5cb1372675, type: 3}
@@ -829,8 +828,9 @@ GameObject:
   - component: {fileID: 1039632005}
   - component: {fileID: 1039632004}
   - component: {fileID: 1039632008}
+  - component: {fileID: 1039632009}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -932,6 +932,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f959c6a8f9b70ac42854311964c60c32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1039632009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1039632003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa59199691a1409483c7f5b745301341, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _health:
@@ -1038,8 +1050,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1141760444}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.045826524, z: -0, w: 0.99894947}
-  m_LocalPosition: {x: 1.5669155, y: 2.5, z: -3.3695865}
+  m_LocalRotation: {x: 0.000000029802322, y: -0.045826517, z: -0.0000000018626451, w: 0.99894947}
+  m_LocalPosition: {x: 1.3466325, y: 2.1050003, z: -3.0555866}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2001,6 +2013,10 @@ PrefabInstance:
       propertyPath: m_AllowMSAA
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4082740481484330916, guid: 3cf9ae04f29a2ce45b5d19de5df733f0, type: 3}
+      propertyPath: _health.value
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 4377846898337609816, guid: 3cf9ae04f29a2ce45b5d19de5df733f0, type: 3}
       propertyPath: _viewPoint
       value: 
@@ -2066,22 +2082,22 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7695659033098841851, guid: 3cf9ae04f29a2ce45b5d19de5df733f0, type: 3}
   m_PrefabInstance: {fileID: 1998493246}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1998493248 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4377846898337609816, guid: 3cf9ae04f29a2ce45b5d19de5df733f0, type: 3}
-  m_PrefabInstance: {fileID: 1998493246}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ee37ff886f341c887640d1d830b46cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1998493249 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1742538163575804171, guid: 3cf9ae04f29a2ce45b5d19de5df733f0, type: 3}
   m_PrefabInstance: {fileID: 1998493246}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1998493253 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4082740481484330916, guid: 3cf9ae04f29a2ce45b5d19de5df733f0, type: 3}
+  m_PrefabInstance: {fileID: 1998493246}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa59199691a1409483c7f5b745301341, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2094766928
 GameObject:
   m_ObjectHideFlags: 0
@@ -2132,7 +2148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11e82de8a6bc32f4f86152622b63b383, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _model: {fileID: 1998493248}
+  _model: {fileID: 1998493253}
   _healthValue: {fileID: 1962910627}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

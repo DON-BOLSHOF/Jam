@@ -3,14 +3,11 @@ using UniRx;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController), typeof(PlayerInput))]
-public class Model : MonoBehaviour
+public class Hero : AliveObject
 {
     [SerializeField] private float moveSpeed = 5.0f; // Скорость движения
     [SerializeField] private float jumpForce = 8.0f; // Сила прыжка
     [SerializeField] private float gravity = 20.0f; // Гравитация
-
-    private readonly ReactiveProperty<int> _health = new(100);
-    public IObservable<int> HealthObservable => _health.AsObservable();
 
     private PlayerInput _playerInput;
     private CharacterController _controller;
@@ -48,9 +45,6 @@ public class Model : MonoBehaviour
         
         _moveDirection.y -= gravity * Time.deltaTime;
 
-        if (Input.GetKeyDown(KeyCode.Q))
-            GetDamage(5);
-        
         RotateOnLookTransform();
         
         _animMov = Vector2.Lerp(_animMov,_targetMov, Time.deltaTime * 5);
@@ -80,10 +74,5 @@ public class Model : MonoBehaviour
         Vector3 tempRot = _lookRot;
         tempRot.x = 0;
         transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(tempRot), 50);
-    }
-
-    private void GetDamage(int value)
-    {
-        _health.Value -= value;
     }
 }

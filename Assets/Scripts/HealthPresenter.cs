@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HealthPresenter : MonoBehaviour
 {
-    [SerializeField] private Model _model;
+    [SerializeField] private HealthComponent _model;
 
     [SerializeField] private TextMeshProUGUI _healthValue;
 
