@@ -27,6 +27,7 @@ public class Model : MonoBehaviour
 
     [SerializeField] private Animator _animator;
     private int _animSpeed = Animator.StringToHash("Speed");
+    private int _animStrafe = Animator.StringToHash("Strafe");
     private Vector2 _animMov, _targetMov;
     private Transform _cameraTransform;
 
@@ -55,6 +56,7 @@ public class Model : MonoBehaviour
         
         _animMov = Vector2.Lerp(_animMov,_targetMov, Time.deltaTime * 5);
         _animator.SetFloat(_animSpeed, _animMov.y);
+        _animator.SetFloat(_animStrafe, _animMov.x);
         
         _controller.Move(transform.localToWorldMatrix * _moveDirection * Time.deltaTime);
     }
