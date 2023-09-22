@@ -12,4 +12,9 @@ public class Enemy : MonoBehaviour
     {
         _agent = GetComponent<NavMeshAgent>();
     }
+
+    private void Update()
+    {
+        _agent.SetDestination(_player.position);
+    }
 }
