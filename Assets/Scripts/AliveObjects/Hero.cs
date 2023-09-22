@@ -20,6 +20,8 @@ namespace AliveObjects
         private Vector3 _lookRot;
         private Vector2 _rotationInput;
 
+        private Quaternion _currentRot;
+        
         protected override void Start()
         {
             _controller = GetComponent<CharacterController>();
@@ -48,8 +50,8 @@ namespace AliveObjects
             _lookRot.x -= _rotationInput.y;
             _lookRot.x = Mathf.Clamp(_lookRot.x, -30, 60);
 
-            var rotation = Quaternion.Lerp(_lookTransform.rotation, Quaternion.Euler(_lookRot), .25f);
-            _lookTransform.rotation = rotation;
+            _currentRot = Quaternion.Lerp(_lookTransform.rotation, Quaternion.Euler(_lookRot), .25f);
+            _lookTransform.rotation = _currentRot;
             
             base.LateUpdate();
         }
@@ -65,6 +67,7 @@ namespace AliveObjects
             Vector3 tempRot = _lookRot;
             tempRot.x = 0;
             transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(tempRot), 50);
+            _lookTransform.rotation = _currentRot;
         }
     }
 }
