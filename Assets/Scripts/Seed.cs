@@ -1,4 +1,5 @@
 ﻿using System;
+using Components;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
@@ -8,11 +9,13 @@ public class Seed : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log(collision.gameObject.name);
-        
         if (collision.gameObject.TryGetComponent<HealthComponent>(out var health))
         {
             health.ModifyHealth(-_damage);
+        }
+        else if (collision.gameObject.TryGetComponent<GerminatingSurface>(out var surface))
+        {
+            surface.GerminateSurface();
         }
 
         Destroy(gameObject);

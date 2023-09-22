@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
@@ -8,16 +7,13 @@ public class Gun : MonoBehaviour
     [SerializeField] private GameObject _bulletPrefab;
     [SerializeField] private float _shootForce;
     [SerializeField] private float _upwardForce;
-    
-    public void Shoot()
+
+    private void Shoot()
     {
         var ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         
         Vector3 targetPoint;
-        if (Physics.Raycast(ray, out var hit))
-            targetPoint = hit.point;
-        else
-            targetPoint = ray.GetPoint(_distance);
+        targetPoint = Physics.Raycast(ray, out var hit) ? hit.point : ray.GetPoint(_distance);
 
         var path = targetPoint - _shootPoint.position;
 
