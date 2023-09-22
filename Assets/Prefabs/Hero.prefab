@@ -106,6 +106,8 @@ MonoBehaviour:
   moveSpeed: 5
   jumpForce: 15
   gravity: 20
+  _lookTransform: {fileID: 1742538163575804171}
+  _rotationSpeed: 10
 --- !u!143 &889307468262257756
 CharacterController:
   m_ObjectHideFlags: 0
