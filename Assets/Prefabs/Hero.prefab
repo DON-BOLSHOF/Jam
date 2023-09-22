@@ -196,6 +196,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: mice
       objectReference: {fileID: 0}
+    - target: {fileID: 2313877837151514810, guid: 03d50da00f6209f468e8cd82d8b2f004, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: dc97d93b54cadd74da25e9430a751244, type: 2}
+    - target: {fileID: 2321523695958950486, guid: 03d50da00f6209f468e8cd82d8b2f004, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a5846e0953b728d468e7463a3ebf8494, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
