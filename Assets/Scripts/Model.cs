@@ -19,45 +19,61 @@ public class Model : MonoBehaviour
     private float _jumpVelocity = 0;
 
     [SerializeField] private Transform _lookTransform;
+    private Vector3 _lookRot;
     [SerializeField] private float _rotationSpeed;
     private Vector2 _currentMouseDelta;
     private float _cameraCap;
     private Vector2 _rotationInput;
+
+    [SerializeField] private Animator _animator;
+    private int _animSpeed = Animator.StringToHash("Speed");
+    private Transform _cameraTransform;
 
     private void Start()
     {
         _controller = GetComponent<CharacterController>();
         _playerInput = GetComponent<PlayerInput>();
 
-        _playerInput.OnGroundedMoved.Subscribe(vector2 =>
-                _moveDirection = transform.TransformDirection(new Vector3(vector2.x, 0, vector2.y)) * moveSpeed)
-            .AddTo(this);
+        _playerInput.OnGroundedMoved.Subscribe(UpdateMovement).AddTo(this);
         _playerInput.OnJumped.Subscribe(value => _jumpVelocity = value * jumpForce).AddTo(this);
         _playerInput.OnMouseMoved.Subscribe(value => _rotationInput = value).AddTo(this);
+        _cameraTransform = Camera.main.transform;
     }
 
     private void Update()
     {
         if (_controller.isGrounded && _jumpVelocity > 0)
-        {
             _moveDirection.y = _jumpVelocity;
-        }
         
         _moveDirection.y -= gravity * Time.deltaTime;
 
         if (Input.GetKeyDown(KeyCode.Q))
             GetDamage(5);
+        
+        RotateOnLookTransform();
     }
 
     private void LateUpdate()
     {
-        Vector3 rot = _lookTransform.rotation.eulerAngles;
+        _lookRot.y += _rotationInput.x;
+        _lookRot.x -= _rotationInput.y;
+        _lookRot.x = Mathf.Clamp(_lookRot.x, -30, 60);
 
-        rot.y += _rotationInput.x;
-        rot.x += _rotationInput.y;
-
-        var rotation = Quaternion.Euler(rot);
+        var rotation = Quaternion.Lerp(_lookTransform.rotation, Quaternion.Euler(_lookRot), Time.deltaTime * 10);
         _lookTransform.rotation = rotation;
+    }
+
+    private void UpdateMovement(Vector2 mov)
+    {
+        _moveDirection = _cameraTransform.localToWorldMatrix * (new Vector3(mov.x, 0, mov.y)) * moveSpeed;
+        _animator.SetFloat(_animSpeed, mov.y);
+    }
+
+    private void RotateOnLookTransform()
+    {
+        Vector3 tempRot = _lookRot;
+        tempRot.x = 0;
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(tempRot), 50);
     }
 
     private void GetDamage(int value)
