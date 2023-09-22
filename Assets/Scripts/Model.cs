@@ -56,7 +56,7 @@ public class Model : MonoBehaviour
         _animMov = Vector2.Lerp(_animMov,_targetMov, Time.deltaTime * 5);
         _animator.SetFloat(_animSpeed, _animMov.y);
         
-        _controller.Move(_moveDirection * Time.deltaTime);
+        _controller.Move(transform.localToWorldMatrix * _moveDirection * Time.deltaTime);
     }
 
     private void LateUpdate()
@@ -72,7 +72,7 @@ public class Model : MonoBehaviour
     private void UpdateMovement(Vector2 mov)
     {
         _targetMov = (new Vector3(mov.x, mov.y)) * moveSpeed;
-        _moveDirection = _cameraTransform.localToWorldMatrix * (new Vector3(mov.x, 0, mov.y)) * moveSpeed;
+        _moveDirection = (new Vector3(mov.x, 0, mov.y)) * moveSpeed;
     }
 
     private void RotateOnLookTransform()
