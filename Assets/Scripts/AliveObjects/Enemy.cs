@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
+using Debug = UnityEngine.Debug;
 
 namespace AliveObjects
 {
@@ -18,6 +19,13 @@ namespace AliveObjects
         private void Update()
         {
             _agent.SetDestination(_player.position);
+            
+            if(_agent.remainingDistance <= _agent.stoppingDistance) Debug.Log("agent");
+        }
+
+        private void Move()
+        {
+            
         }
 
         public void Stun()

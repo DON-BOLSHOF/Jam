@@ -25,7 +25,7 @@ namespace AliveObjects
         private int _animStrafe = Animator.StringToHash("Strafe");
         private Vector3 _animMov, _targetMov;
 
-        private void Start()
+        protected override void Start()
         {
             _controller = GetComponent<CharacterController>();
             _playerInput = GetComponent<PlayerInput>();
