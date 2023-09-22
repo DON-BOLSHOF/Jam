@@ -8,7 +8,8 @@ public class PlayerInput : MonoBehaviour
     private PlayerInputSystem _playerInputSystem;
 
     public ReactiveCommand<float> OnJumped = new();
-    public ReactiveCommand<Vector2> OnMoved = new();
+    public ReactiveCommand<Vector2> OnGroundedMoved = new();
+    public ReactiveCommand<Vector2> OnMouseMoved = new();
 
     private void Awake()
     {
@@ -22,13 +23,16 @@ public class PlayerInput : MonoBehaviour
         
         _playerInputSystem.Keyboard.Jump.performed += OnJump;
         _playerInputSystem.Keyboard.Jump.canceled += OnJump;
+
+        _playerInputSystem.Mouse.MouseMove.performed += OnMouseMove;
+        _playerInputSystem.Mouse.MouseMove.canceled += OnMouseMove;
     }
 
     private void OnMove(InputAction.CallbackContext obj)
     {
         var value = obj.ReadValue<Vector2>();
 
-        OnMoved?.Execute(value);
+        OnGroundedMoved?.Execute(value);
     }
     
     private void OnJump(InputAction.CallbackContext obj)
@@ -36,6 +40,13 @@ public class PlayerInput : MonoBehaviour
         var value = obj.ReadValue<float>();
 
         OnJumped?.Execute(value);
+    }
+
+    private void OnMouseMove(InputAction.CallbackContext obj)
+    {
+        var value = obj.ReadValue<Vector2>();
+        
+        OnMouseMoved?.Execute(value);
     }
 
     private void OnEnable()
@@ -55,5 +66,8 @@ public class PlayerInput : MonoBehaviour
         
         _playerInputSystem.Keyboard.Jump.performed -= OnJump;
         _playerInputSystem.Keyboard.Jump.canceled -= OnJump;
+        
+        _playerInputSystem.Mouse.MouseMove.performed -= OnMouseMove;
+        _playerInputSystem.Mouse.MouseMove.canceled -= OnMouseMove;
     }
 }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 262.18533, g: 324.8582, b: 429.96686, a: 1}
+  m_IndirectSpecularColor: {r: 262.33694, g: 325.04984, b: 430.2193, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -458,6 +458,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 464019848607085241, guid: fc865bedce8506e469786831fd627442, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2734389830398427041, guid: fc865bedce8506e469786831fd627442, type: 3}
       propertyPath: m_LocalPosition.x
       value: 19.45
@@ -523,6 +527,10 @@ PrefabInstance:
     - target: {fileID: 464019848607085241, guid: fc865bedce8506e469786831fd627442, type: 3}
       propertyPath: m_Name
       value: Enemy (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 464019848607085241, guid: fc865bedce8506e469786831fd627442, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2734389830398427041, guid: fc865bedce8506e469786831fd627442, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1716,6 +1724,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 464019848607085241, guid: fc865bedce8506e469786831fd627442, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2734389830398427041, guid: fc865bedce8506e469786831fd627442, type: 3}
       propertyPath: m_LocalPosition.x
       value: 18.7
@@ -1814,6 +1826,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 464019848607085241, guid: fc865bedce8506e469786831fd627442, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2734389830398427041, guid: fc865bedce8506e469786831fd627442, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.06365478
@@ -1876,6 +1892,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1316245587}
     m_Modifications:
+    - target: {fileID: 4377846898337609816, guid: 3cf9ae04f29a2ce45b5d19de5df733f0, type: 3}
+      propertyPath: _viewPoint
+      value: 
+      objectReference: {fileID: 1617091746}
+    - target: {fileID: 4377846898337609816, guid: 3cf9ae04f29a2ce45b5d19de5df733f0, type: 3}
+      propertyPath: _rotationSpeed
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4700531158919390323, guid: 3cf9ae04f29a2ce45b5d19de5df733f0, type: 3}
       propertyPath: m_Name
       value: Hero

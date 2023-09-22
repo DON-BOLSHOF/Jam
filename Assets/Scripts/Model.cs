@@ -18,15 +18,22 @@ public class Model : MonoBehaviour
     private Vector3 _moveDirection = Vector3.zero;
     private float _jumpVelocity = 0;
 
+    [SerializeField] private Transform _viewPoint;
+    [SerializeField] private float _rotationSpeed;
+    private Vector2 _currentMouseDelta;
+    private float _cameraCap;
+    private Vector2 _lineOfSight;
+
     private void Start()
     {
         _controller = GetComponent<CharacterController>();
         _playerInput = GetComponent<PlayerInput>();
 
-        _playerInput.OnMoved.Subscribe(vector2 =>
+        _playerInput.OnGroundedMoved.Subscribe(vector2 =>
                 _moveDirection = transform.TransformDirection(new Vector3(vector2.x, 0, vector2.y)) * moveSpeed)
             .AddTo(this);
         _playerInput.OnJumped.Subscribe(value => _jumpVelocity = value * jumpForce).AddTo(this);
+        _playerInput.OnMouseMoved.Subscribe(value => _lineOfSight = value).AddTo(this);
     }
 
     private void Update()
@@ -46,16 +53,18 @@ public class Model : MonoBehaviour
     {
         _health.Value -= value;
     }
-
+    
     private void FixedUpdate()
     {
         _controller.Move(_moveDirection * Time.deltaTime);
         
-        if (new Vector2(_moveDirection.x, _moveDirection.z).sqrMagnitude == 0) return;
+        var mouseViewportPosition = Camera.main.ViewportToWorldPoint(new Vector3(_lineOfSight.x, _lineOfSight.y, Camera.main.transform.position.z));
+        
+        var positionToLookAt = new Vector3(mouseViewportPosition.x, mouseViewportPosition.y, mouseViewportPosition.z);
+        
+        var targetRotation = Quaternion.LookRotation(positionToLookAt - _viewPoint.position);
 
-        float currentVelocity = 0;
-        var targetAngle = Mathf.Atan2(_moveDirection.x, _moveDirection.z) * Mathf.Rad2Deg;
-        var angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref currentVelocity, 0.05f);
-        transform.rotation = Quaternion.Euler(0.0f, angle, 0.0f);
+        var rotation = Quaternion.Slerp(_viewPoint.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
+        _viewPoint.rotation = rotation;
     }
 }
