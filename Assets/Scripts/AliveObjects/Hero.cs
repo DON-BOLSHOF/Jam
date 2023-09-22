@@ -4,7 +4,7 @@ using UnityEngine;
 namespace AliveObjects
 {
     [RequireComponent(typeof(CharacterController), typeof(PlayerInput))]
-    public class Hero : AliveObject
+    public class Hero : AliveMovementObject
     {
         [SerializeField] private float moveSpeed = 5.0f; // Скорость движения
         [SerializeField] private float jumpForce = 8.0f; // Сила прыжка
@@ -19,11 +19,6 @@ namespace AliveObjects
         [SerializeField] private Transform _lookTransform;
         private Vector3 _lookRot;
         private Vector2 _rotationInput;
-
-        [SerializeField] private Animator _animator;
-        private int _animSpeed = Animator.StringToHash("Speed");
-        private int _animStrafe = Animator.StringToHash("Strafe");
-        private Vector3 _animMov, _targetMov;
 
         protected override void Start()
         {
@@ -43,15 +38,11 @@ namespace AliveObjects
             _moveDirection.y -= gravity * Time.deltaTime;
 
             RotateOnLookTransform();
-        
-            _animMov = Vector3.Lerp(_animMov,_targetMov, Time.deltaTime * 5);
-            _animator.SetFloat(_animSpeed, _animMov.y);
-            _animator.SetFloat(_animStrafe, _animMov.x);
-        
+            
             _controller.Move(transform.localToWorldMatrix * _moveDirection * Time.deltaTime);
         }
 
-        private void LateUpdate()
+        protected override void LateUpdate()
         {
             _lookRot.y += _rotationInput.x;
             _lookRot.x -= _rotationInput.y;
@@ -59,6 +50,8 @@ namespace AliveObjects
 
             var rotation = Quaternion.Lerp(_lookTransform.rotation, Quaternion.Euler(_lookRot), .25f);
             _lookTransform.rotation = rotation;
+            
+            base.LateUpdate();
         }
 
         private void UpdateMovement(Vector2 mov)

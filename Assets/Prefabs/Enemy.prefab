@@ -159,6 +159,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 0}
+  _animator: {fileID: 8960358947263777605}
 --- !u!114 &4863685959614764075
 MonoBehaviour:
   m_ObjectHideFlags: 0
